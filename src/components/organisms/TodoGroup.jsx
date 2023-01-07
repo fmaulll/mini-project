@@ -5,7 +5,7 @@ import TodoHeader from "../molecules/TodoHeader";
 import TodoItem from "../molecules/TodoItem";
 import { BiPlusCircle } from "react-icons/bi";
 
-const TodoGroup = ({ data, index }) => {
+const TodoGroup = ({ data, index, handleActionMenu }) => {
   return (
     <CardTodo index={index}>
       <TodoHeader date={data.date} title={data.title} index={index} />
@@ -15,8 +15,8 @@ const TodoGroup = ({ data, index }) => {
             addStyle={`${data.task?.length === index + 1 ? "" : "mb-3"}`}
             index={index}
             key={index}
-            title={item.title}
-            progress={item.progress}
+            item={item}
+            handleActionMenu={handleActionMenu}
           />
         ))}
       </div>

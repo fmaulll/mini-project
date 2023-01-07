@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
+import ModalDelete from "../components/organisms/ModalDelete";
 import TodoGroup from "../components/organisms/TodoGroup";
 
 const dummy = [
@@ -44,17 +45,68 @@ const dummy = [
       { title: "Ngepel rumah pak joe koe wee", progress: 50 },
     ],
   },
+  {
+    title: "Task Group 1",
+    date: "March - May",
+    tasks: [
+      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
+      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
+    ],
+  },
+  {
+    title: "Task Group 1",
+    date: "March - May",
+    tasks: [
+      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
+      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
+    ],
+  },
+  {
+    title: "Task Group 1",
+    date: "March - May",
+    tasks: [
+      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
+      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
+    ],
+  },
 ];
 
 const TodoPage = () => {
+  const [openDelete, setOpenDelete] = useState(true);
+
+  const handleMoveRight = async() => {
+
+  }
+  const handleMoveLeft = async() => {
+
+  }
+
+  const handleActionMenu = (type) => {
+    if(type === "right"){
+      handleMoveRight()
+    }
+    if(type === "left"){
+      handleMoveLeft()
+    }
+    if(type === "edit"){
+      handleMoveLeft()
+    }
+    if(type === "delete"){
+      setOpenDelete(true)
+    }
+  }
+
   return (
-    <div className="p-6">
-      <div className="grid grid-cols-4 gap-4">
-        {dummy.map((item, index) => (
-          <TodoGroup data={item} index={index} key={index} />
-        ))}
+    <Fragment>
+      <div className="p-6">
+        <div className="grid grid-cols-4 gap-4">
+          {dummy.map((item, index) => (
+            <TodoGroup data={item} index={index} key={index} handleActionMenu={handleActionMenu} />
+          ))}
+        </div>
       </div>
-    </div>
+      {openDelete && <ModalDelete onClose={() => setOpenDelete(false)} />}
+    </Fragment>
   );
 };
 

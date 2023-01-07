@@ -13,7 +13,6 @@ const CardTodo = ({ children, index }) => {
     }
     return "border-primary bg-[#F7FEFF]";
   };
-  console.log(index)
   return (
     <div className={`rounded border h-min p-4 ${getColor(index)}`}>{children}</div>
   );

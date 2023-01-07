@@ -16,6 +16,7 @@ module.exports = {
         caution: "#FEEABC",
         green: "#43936C",
         orange: "#FA9810",
+        darkTransparent: "rgba(64, 64, 64, 0.5)"
       },
     },
   },

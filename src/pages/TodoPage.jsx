@@ -6,8 +6,10 @@ const dummy = [
     title: "Task Group 10",
     date: "March - May",
     tasks: [
-      { title: "Ngepel rumah pak joe koe wee", progress: 100 },
+      { title: "Ngepel rumah pak joe koe wee", progress: 37 },
       { title: "Ngepel rumah pak joe koe wee", progress: 20 },
+      { title: "Ngepel rumah pak joe koe wee", progress: 98 },
+      { title: "Ngepel rumah pak joe koe wee", progress: 24 },
     ],
   },
   {
@@ -15,7 +17,7 @@ const dummy = [
     date: "March - May",
     tasks: [
       { title: "Ngepel rumah pak joe koe wee", progress: 70 },
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
+      { title: "Ngepel rumah pak joe koe wee", progress: 100 },
     ],
   },
   {

@@ -8,10 +8,10 @@ const TodoItem = ({ title, progress, addStyle }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickMenu = () => {
-    setOpen(!open);
+    setOpen(true);
   };
   return (
-    <div className={`relative p-4 border border-[#E0E0E0] ${addStyle}`}>
+    <div className={`relative p-4 border border-[#E0E0E0] rounded ${addStyle}`}>
       <h1 className="font-bold text-dark">{title}</h1>
       <div className="w-full flex items-center">
         <Progress progress={progress} />
@@ -27,7 +27,7 @@ const TodoItem = ({ title, progress, addStyle }) => {
           size={32}
         />
       </div>
-      {open ? <Menu /> : null}
+      {open ? <Menu onClose={() => setOpen(false)} /> : null}
     </div>
   );
 };

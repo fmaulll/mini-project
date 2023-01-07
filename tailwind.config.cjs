@@ -14,7 +14,8 @@ module.exports = {
         success: "#B8DBCA",
         danger: "#F5B1B7",
         caution: "#FEEABC",
-        green: "#43936C"
+        green: "#43936C",
+        orange: "#FA9810",
       },
     },
   },

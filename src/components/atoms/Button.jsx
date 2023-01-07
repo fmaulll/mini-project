@@ -1,6 +1,6 @@
 import React from "react";
 
-const Button = ({ children, buttonType = "primary", icon }) => {
+const Button = ({ children, buttonType = "add", icon }) => {
   const getStyle = (type) => {
     if (type === "primary") {
       return "bg-primary text-white hover:bg-primaryBright active:bg-primaryDark";
@@ -15,9 +15,7 @@ const Button = ({ children, buttonType = "primary", icon }) => {
   };
   return (
     <button
-      className={`shadow-lg px-4 h-7 text-xs font-bold rounded-lg flex items-center duration-200 ${getStyle(
-        buttonType
-      )}`}
+      className={buttonType === "add" ? "font-normal text-sm flex items-center" : `shadow-lg px-4 h-7 text-xs font-bold rounded-lg flex items-center duration-200 ${getStyle(buttonType)}`}
     >
       {icon ? <div className="mr-1">{icon}</div> : null}
       {children}

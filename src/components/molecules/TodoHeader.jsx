@@ -1,6 +1,6 @@
 import React from "react";
 
-const TodoHeader = ({ title, date, index }) => {
+const TodoHeader = ({ data, index }) => {
   const getColor = (idx) => {
     if ((idx + 1) % 4 === 0) {
       return "border-success text-green";
@@ -20,9 +20,9 @@ const TodoHeader = ({ title, date, index }) => {
           index
         )}`}
       >
-        {title}
+        {data.title}
       </h1>
-      <h1 className="text-dark text-xs font-bold">{date}</h1>
+      <h1 className="text-dark text-xs font-bold">{data.description}</h1>
     </div>
   );
 };

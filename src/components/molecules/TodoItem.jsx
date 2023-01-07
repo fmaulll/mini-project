@@ -14,12 +14,12 @@ const TodoItem = ({ item, addStyle, handleActionMenu }) => {
     <div className={`relative p-4 border border-[#E0E0E0] rounded ${addStyle}`}>
       <h1 className="font-bold text-dark">{item.name}</h1>
       <div className="w-full flex items-center">
-        <Progress progress={item.progress} />
+        <Progress progress={item.progress_percentage} />
         {item.progress === 100 ? (
           <HiCheckCircle className="ml-4 mr-[26px]" color="#43936C" size={24} />
         ) : (
           <h1 className="ml-4 mr-[26px] text-sm text-[#757575]">
-            {item.progress}%
+            {item.progress_percentage}%
           </h1>
         )}
         <FiMoreHorizontal

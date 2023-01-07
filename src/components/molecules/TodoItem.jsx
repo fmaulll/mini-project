@@ -22,9 +22,8 @@ const TodoItem = ({ title, progress, addStyle }) => {
         )}
         <FiMoreHorizontal
           onClick={handleClickMenu}
-          className="cursor-pointer"
+          className="cursor-pointer w-6 flex justify-center items-center hover:bg-[#EDEDED] duration-200 rounded"
           color="#757575"
-          size={32}
         />
       </div>
       {open ? <Menu onClose={() => setOpen(false)} /> : null}

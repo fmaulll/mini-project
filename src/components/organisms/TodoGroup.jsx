@@ -79,7 +79,7 @@ const TodoGroup = ({
               </div>
             ) : (
               <div
-                className={`my-4 relative px-4 py-2 border border-[#E0E0E0] rounded text-gray-500`}
+                className={`mt-2 mb-4 relative px-4 py-2 border border-[#E0E0E0] rounded text-gray-500`}
               >
                 No Task
               </div>

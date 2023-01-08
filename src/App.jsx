@@ -6,14 +6,15 @@ import Layout from "./layout";
 import TodoPage from "./pages/TodoPage";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <DndProvider backend={HTML5Backend}>
       <BrowserRouter>
         <Layout>
           <Routes>
-            <Route path="/v1/" element={<TodoPage />} />
+            <Route path="/*">
+              <Route index path="v1" element={<TodoPage />} />
+            </Route>
           </Routes>
         </Layout>
       </BrowserRouter>

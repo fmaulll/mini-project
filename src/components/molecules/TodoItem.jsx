@@ -3,17 +3,25 @@ import Progress from "../atoms/Progress";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { HiCheckCircle } from "react-icons/hi";
 import Menu from "./Menu";
+import { useDrag } from "react-dnd";
 
 const TodoItem = ({ todos, item, addStyle, handleActionMenu }) => {
   const [open, setOpen] = useState(false);
+  const [{isDragging}, drag] = useDrag(() => ({
+    type: "task",
+    item,
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    })
+  }))
 
   const handleClickMenu = () => {
     setOpen(true);
   };
   return (
-    <div className={`relative p-4 border border-[#E0E0E0] rounded ${addStyle}`}>
+    <div ref={drag} className={`${isDragging ? "cursor-grabbing" : "cursor-grab"} relative p-4 border border-[#E0E0E0] rounded ${addStyle}`}>
       <h1 className="font-bold text-dark">{item.name}</h1>
-      <div className="w-full flex items-center">
+      <div className="w-full flex items-center pt-3 border-t mt-2 border-[#E0E0E0] border-dashed">
         <Progress progress={item.progress_percentage} />
         {item.progress_percentage === 100 ? (
           <HiCheckCircle className="ml-4 mr-[26px]" color="#43936C" size={32} />

@@ -69,6 +69,26 @@ const TodoPage = () => {
     }
   };
 
+  const handleMoveDrag = async (item, targetId) => {
+    if (item.todo_id === targetId) {
+      return;
+    }
+    try {
+      const result = await axios({
+        url: `https://todo-api-18-140-52-65.rakamin.com/todos/${item.todo_id}/items/${item.id}`,
+        method: "PATCH",
+        data: { target_todo_id: targetId },
+        headers: { authorization: `Bearer ${token}` },
+      });
+      if (result.status === 200) {
+        getData(token);
+        setLoading(false);
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   const handleMove = async (item) => {
     setLoading(true);
     try {
@@ -181,6 +201,7 @@ const TodoPage = () => {
                     onClickAdd={handleClickAdd}
                     handleActionMenu={handleActionMenu}
                     todos={data}
+                    handleMoveDrag={handleMoveDrag}
                   />
                 ))}
               </div>

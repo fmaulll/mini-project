@@ -6,10 +6,26 @@ import TodoItem from "../molecules/TodoItem";
 import { BiPlusCircle } from "react-icons/bi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
+import { useDrop } from "react-dnd";
 
-const TodoGroup = ({ todos, token, data, index, handleActionMenu, onClickAdd }) => {
+const TodoGroup = ({
+  handleMoveDrag,
+  todos,
+  token,
+  data,
+  index,
+  handleActionMenu,
+  onClickAdd,
+}) => {
   const [loading, setLoading] = useState(false);
   const [dataTask, setDataTask] = useState({});
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: "task",
+    drop: (item) => handleMoveDrag(item, data.id),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }));
 
   useEffect(() => {
     setLoading(true);
@@ -28,49 +44,54 @@ const TodoGroup = ({ todos, token, data, index, handleActionMenu, onClickAdd }) 
           alert("Something went wrong!");
         }
       } catch (error) {
-        alert(error)
+        alert(error);
       }
     };
 
     getDataTask();
-  }, []);
+  }, [data]);
 
   return (
     <Fragment>
       {loading ? (
         <CardTodo index={index}>
           <div className="flex justify-center items-center font-bold text-dark">
-            <AiOutlineLoading3Quarters className="animate-spin mr-2" />{" "}
-            Getting Tasks...
+            <AiOutlineLoading3Quarters className="animate-spin mr-2" /> Getting
+            Tasks...
           </div>
         </CardTodo>
       ) : (
-        <CardTodo index={index}>
-          <TodoHeader data={data} index={index} />
-          {dataTask.length > 0 ? (
-            <div className="my-4">
-              {dataTask.map((item, index) => (
-                <TodoItem
-                  addStyle={`${dataTask?.length === index + 1 ? "" : "mb-3"}`}
-                  index={index}
-                  key={index}
-                  item={item}
-                  handleActionMenu={handleActionMenu}
-                  todos={todos}
-                />
-              ))}
-            </div>
-          ) : (
-            <div
-              className={`my-4 relative p-4 border border-[#E0E0E0] rounded text-gray-500`}
+        <div ref={drop}>
+          <CardTodo styling={`${isOver ? "bg-gray-100" : ""}`} index={index}>
+            <TodoHeader data={data} index={index} />
+            {dataTask.length > 0 ? (
+              <div className="my-4">
+                {dataTask.map((item, index) => (
+                  <TodoItem
+                    addStyle={`${dataTask?.length === index + 1 ? "" : "mb-3"}`}
+                    index={index}
+                    key={index}
+                    item={item}
+                    handleActionMenu={handleActionMenu}
+                    todos={todos}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div
+                className={`my-4 relative p-4 border border-[#E0E0E0] rounded text-gray-500`}
+              >
+                No Task
+              </div>
+            )}
+            <Button
+              onClick={() => onClickAdd(data.id)}
+              icon={<BiPlusCircle size={24} />}
             >
-              No Task
-            </div>
-          )}
-          <Button onClick={() => onClickAdd(data.id)} icon={<BiPlusCircle size={24} />}>
-            New Task
-          </Button>
-        </CardTodo>
+              New Task
+            </Button>
+          </CardTodo>
+        </div>
       )}
     </Fragment>
   );

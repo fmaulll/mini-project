@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import ModalAddTodo from "../components/organisms/ModalAddTodo";
 import Header from "./Header";
 
@@ -52,6 +52,12 @@ const Layout = ({ children }) => {
     setOpen(false);
     setData(initData);
   };
+
+  useEffect(() => {
+    if (window.location.pathname === "/") {
+      window.location.pathname = "/v1";
+    }
+  }, []);
 
   return (
     <Fragment>

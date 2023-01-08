@@ -4,7 +4,7 @@ import { HiOutlineExclamation } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 import Button from "../atoms/Button";
 
-const DeleteTask = ({ onClose }) => {
+const DeleteTask = ({ handleDelete, onClose }) => {
   return (
     <Card onClose={onClose}>
       <div className="flex justify-between items-center mb-4">
@@ -17,7 +17,7 @@ const DeleteTask = ({ onClose }) => {
       <p className="text-[14px] font-normal mb-4">Are you sure want to delete this task? your action can’t be reverted.</p>
       <div className="flex justify-end">
         <Button styling="mr-[10px]" onClick={onClose} buttonType="white">Cancel</Button>
-        <Button buttonType="red">Delete</Button>
+        <Button onClick={handleDelete} buttonType="red">Delete</Button>
       </div>
     </Card>
   );

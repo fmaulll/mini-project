@@ -25,6 +25,24 @@ const TodoPage = () => {
     progress_percentage: "",
   });
 
+  const handleDelete = async () => {
+    setLoading(true);
+    try {
+      const result = await axios({
+        url: `https://todo-api-18-140-52-65.rakamin.com/todos/${selectedTodo}/items/${selectedId}`,
+        method: "DELETE",
+        headers: { authorization: `Bearer ${token}` },
+      });
+      if (result.status === 204) {
+        getData(token);
+        setOpenDelete(false);
+        setLoading(false);
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   const handleSave = async (type) => {
     setLoading(true);
     try {
@@ -172,7 +190,12 @@ const TodoPage = () => {
               </div>
             )}
           </div>
-          {openDelete && <ModalDelete onClose={() => setOpenDelete(false)} />}
+          {openDelete && (
+            <ModalDelete
+              handleDelete={handleDelete}
+              onClose={() => setOpenDelete(false)}
+            />
+          )}
           {openEdit && (
             <ModalAddEdit
               handleSave={handleSave}

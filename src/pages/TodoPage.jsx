@@ -5,6 +5,11 @@ import ModalDelete from "../components/organisms/ModalDelete";
 import TodoGroup from "../components/organisms/TodoGroup";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+const auth = {
+  email: import.meta.env.VITE_EMAIL,
+  password: import.meta.env.VITE_PASSWORD,
+};
+
 const initDataTask = {
   name: "",
   progress_percentage: "",
@@ -164,7 +169,7 @@ const TodoPage = () => {
         const result = await axios({
           url: "https://todo-api-18-140-52-65.rakamin.com/auth/login",
           method: "POST",
-          data: { email: "fmaulll@gmail.com", password: "secretKey" },
+          data: auth,
         });
         if (result.status === 200) {
           setToken(result.data.auth_token);

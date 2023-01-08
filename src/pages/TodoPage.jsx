@@ -49,6 +49,10 @@ const TodoPage = () => {
   };
 
   const handleSave = async (type) => {
+    if(dataTask.name === "" || dataTask.progress_percentage === ""){
+      alert("Input can't be empty!")
+      return
+    }
     setLoading(true);
     try {
       const result = await axios({

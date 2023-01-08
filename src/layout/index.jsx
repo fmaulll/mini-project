@@ -31,6 +31,10 @@ const Layout = ({ children }) => {
   };
 
   const handleSave = async () => {
+    if(data.title === "" || data.description === ""){
+      alert("Input can't be empty!")
+      return
+    }
     const token = localStorage.getItem("token");
     try {
       const result = await axios({

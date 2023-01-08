@@ -10,9 +10,7 @@ function App() {
     <BrowserRouter basename="/v1">
       <DndProvider backend={HTML5Backend}>
         <Layout>
-          <Routes>
-            <Route path="/" element={<TodoPage />} />
-          </Routes>
+          <TodoPage />
         </Layout>
       </DndProvider>
     </BrowserRouter>

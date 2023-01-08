@@ -7,7 +7,7 @@ import TodoPage from "./pages/TodoPage";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/v1">
       <DndProvider backend={HTML5Backend}>
         <Layout>
           <Routes>

@@ -59,12 +59,6 @@ const Layout = ({ children }) => {
     setData(initData);
   };
 
-  useEffect(() => {
-    if (window.location.pathname === "/") {
-      navigate("/v1")
-    }
-  }, []);
-
   return (
     <Fragment>
       <div className="h-screen">

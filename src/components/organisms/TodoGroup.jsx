@@ -4,36 +4,45 @@ import CardTodo from "../atoms/CardTodo";
 import TodoHeader from "../molecules/TodoHeader";
 import TodoItem from "../molecules/TodoItem";
 import { BiPlusCircle } from "react-icons/bi";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
 
 const TodoGroup = ({ token, data, index, handleActionMenu, onClickAdd }) => {
   const [loading, setLoading] = useState(false);
   const [dataTask, setDataTask] = useState({});
 
-  const getDataTask = async() => {
-    try {
-      const result = await axios({
-        url: `https://todo-api-18-140-52-65.rakamin.com/todos/${data.id}/items`,
-        method: "GET",
-        headers: { authorization: `Bearer ${token}` },
-      });
-      if (result.status === 200) {
-        setDataTask(result.data);
-        setLoading(false);
-      } else {
-        alert("Something went wrong!");
-      }
-    } catch (error) {}
-  }
-
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
+
+    const getDataTask = async () => {
+      try {
+        const result = await axios({
+          url: `https://todo-api-18-140-52-65.rakamin.com/todos/${data.id}/items`,
+          method: "GET",
+          headers: { authorization: `Bearer ${token}` },
+        });
+        if (result.status === 200) {
+          setDataTask(result.data);
+          setLoading(false);
+        } else {
+          alert("Something went wrong!");
+        }
+      } catch (error) {
+        alert(error)
+      }
+    };
+
     getDataTask();
-  }, []);
+  }, [data]);
   return (
     <Fragment>
       {loading ? (
-        <CardTodo index={index}>Loading...</CardTodo>
+        <CardTodo index={index}>
+          <div className="flex justify-center items-center font-bold text-dark">
+            <AiOutlineLoading3Quarters className="animate-spin mr-2" />{" "}
+            Loading...
+          </div>
+        </CardTodo>
       ) : (
         <CardTodo index={index}>
           <TodoHeader data={data} index={index} />
@@ -56,7 +65,7 @@ const TodoGroup = ({ token, data, index, handleActionMenu, onClickAdd }) => {
               No Task
             </div>
           )}
-          <Button onClick={onClickAdd} icon={<BiPlusCircle size={24} />}>
+          <Button onClick={() => onClickAdd(data.id)} icon={<BiPlusCircle size={24} />}>
             New Task
           </Button>
         </CardTodo>

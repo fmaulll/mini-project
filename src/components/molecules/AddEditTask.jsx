@@ -4,7 +4,7 @@ import { CgClose } from "react-icons/cg";
 import Button from "../atoms/Button";
 import Input from "../atoms/Input";
 
-const AddEditTask = ({ data, handleChange, type, onClose }) => {
+const AddEditTask = ({ data, handleChange, type, onClose, handleSave }) => {
   return (
     <Card onClose={onClose}>
       <div className="flex justify-between items-center mb-6">
@@ -38,7 +38,7 @@ const AddEditTask = ({ data, handleChange, type, onClose }) => {
         <Button styling="mr-[10px]" onClick={onClose} buttonType="white">
           Cancel
         </Button>
-        <Button buttonType="primary">Save Task</Button>
+        <Button onClick={() => handleSave(type)} buttonType="primary">Save Task</Button>
       </div>
     </Card>
   );

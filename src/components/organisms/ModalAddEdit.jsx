@@ -2,10 +2,10 @@ import React from "react";
 import Modal from "../atoms/Modal";
 import AddEditTask from "../molecules/AddEditTask";
 
-const ModalAddEdit = ({data, handleChange, type, onClose}) => {
+const ModalAddEdit = ({data, handleChange, type, onClose, handleSave}) => {
   return (
     <Modal>
-      <AddEditTask handleChange={handleChange} data={data} type={type} onClose={onClose} />
+      <AddEditTask handleSave={handleSave} handleChange={handleChange} data={data} type={type} onClose={onClose} />
     </Modal>
   );
 };

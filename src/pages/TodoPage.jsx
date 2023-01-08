@@ -3,93 +3,58 @@ import React, { Fragment, useEffect, useState } from "react";
 import ModalAddEdit from "../components/organisms/ModalAddEdit";
 import ModalDelete from "../components/organisms/ModalDelete";
 import TodoGroup from "../components/organisms/TodoGroup";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-const dummy = [
-  {
-    title: "Task Group 10",
-    date: "March - May",
-    tasks: [
-      { title: "Ngepel rumah pak joe koe wee", progress: 37 },
-      { title: "Ngepel rumah pak joe koe wee", progress: 20 },
-      { title: "Ngepel rumah pak joe koe wee", progress: 98 },
-      { title: "Ngepel rumah pak joe koe wee", progress: 24 },
-    ],
-  },
-  {
-    title: "Task Group 1",
-    date: "March - May",
-    tasks: [
-      { title: "Ngepel rumah pak joe koe wee", progress: 70 },
-      { title: "Ngepel rumah pak joe koe wee", progress: 100 },
-    ],
-  },
-  {
-    title: "Task Group 1",
-    date: "March - May",
-    tasks: [
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
-    ],
-  },
-  {
-    title: "Task Group 1",
-    date: "March - May",
-    tasks: [
-      { title: "Ngepel rumah pak joe koe wee", progress: 30 },
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
-    ],
-  },
-  {
-    title: "Task Group 1",
-    date: "March - May",
-    tasks: [
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
-    ],
-  },
-  {
-    title: "Task Group 1",
-    date: "March - May",
-    tasks: [
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
-    ],
-  },
-  {
-    title: "Task Group 1",
-    date: "March - May",
-    tasks: [
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
-    ],
-  },
-  {
-    title: "Task Group 1",
-    date: "March - May",
-    tasks: [
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
-      { title: "Ngepel rumah pak joe koe wee", progress: 50 },
-    ],
-  },
-];
+const initDataTask = {
+  name: "",
+  progress_percentage: "",
+}
 
 const TodoPage = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
-  const [idTask, setIdTask] = useState(null);
   const [data, setData] = useState([]);
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+  const [selectedTodo, setSelectedTodo] = useState(null);
+
+  const [dataTask, setDataTask] = useState({
+    name: "",
+    progress_percentage: "",
+  });
+
+  const handleSave = async (type) => {
+    setLoading(true)
+    try {
+      const result = await axios({
+        url: `https://todo-api-18-140-52-65.rakamin.com/todos/${selectedTodo}/items/${type === "edit" ? selectedId : ""}`,
+        method: type === "edit" ? "PATCH" : "POST",
+        data: dataTask,
+        headers: { authorization: `Bearer ${token}` },
+      });
+      if(result.status === type === "edit" ? 200 : 201){
+        getData(token)
+        setOpenAdd(false)
+        setOpenEdit(false)
+        setDataTask(initDataTask)
+        setLoading(false)
+      }
+    } catch (error) {
+      alert(error)
+    }
+  };
 
   const handleMoveRight = async () => {};
   const handleMoveLeft = async () => {};
 
-  const handleClickAdd = () => {
+  const handleClickAdd = (id) => {
+    setSelectedTodo(id)
     setOpenAdd(true);
   };
 
-  const handleActionMenu = (type, id) => {
+  const handleActionMenu = (type, item) => {
     if (type === "right") {
       handleMoveRight();
     }
@@ -97,15 +62,21 @@ const TodoPage = () => {
       handleMoveLeft();
     }
     if (type === "edit") {
+      setDataTask({
+        name: item.name,
+        progress_percentage: item.progress_percentage,
+      });
       setOpenEdit(true);
     }
     if (type === "delete") {
       setOpenDelete(true);
     }
+    setSelectedId(item.id);
+    setSelectedTodo(item.todo_id);
   };
 
   const handleChange = (key, value) => {
-    setData((prev) => {
+    setDataTask((prev) => {
       return {
         ...prev,
         [key]: value,
@@ -126,7 +97,9 @@ const TodoPage = () => {
       } else {
         alert("Something went wrong!");
       }
-    } catch (error) {}
+    } catch (error) {
+      alert(error)
+    }
   }
 
   useEffect(() => {
@@ -136,12 +109,12 @@ const TodoPage = () => {
         const result = await axios({
           url: "https://todo-api-18-140-52-65.rakamin.com/auth/login",
           method: "POST",
-          // data: { email: "fmaulll@gmail.com", password: "secretKey" },
-          data: { email: "tony@stark.com", password: "password" },
+          data: { email: "fmaulll@gmail.com", password: "secretKey" },
         });
         if (result.status === 200) {
           setToken(result.data.auth_token);
-          getData(result.data.auth_token);
+          localStorage.setItem("token", result.data.auth_token)
+          getData(result.data.auth_token,);
         } else {
           alert("Something went wrong!");
         }
@@ -155,7 +128,10 @@ const TodoPage = () => {
   return (
     <Fragment>
       {loading ? (
-        <div>Loading...</div>
+        <div className="flex justify-center items-center text-2xl font-bold text-dark h-1/2">
+          <AiOutlineLoading3Quarters size={32} className="animate-spin mr-2" />
+          Loading...
+        </div>
       ) : (
         <Fragment>
           <div className="p-6">
@@ -173,26 +149,28 @@ const TodoPage = () => {
                 ))}
               </div>
             ) : (
-              <div>No Content</div>
+              <div className="flex justify-center items-center text-2xl font-bold text-dark h-1/2">No Content</div>
             )}
           </div>
           {openDelete && <ModalDelete onClose={() => setOpenDelete(false)} />}
-          {/* {openEdit && (
-        <ModalAddEdit
-          data={data}
-          type="edit"
-          onClose={() => setOpenEdit(false)}
-          handleChange={handleChange}
-        />
-      )}
-      {openAdd && (
-        <ModalAddEdit
-          data={data}
-          type="add"
-          onClose={() => setOpenAdd(false)}
-          handleChange={handleChange}
-        />
-      )} */}
+          {openEdit && (
+            <ModalAddEdit
+              handleSave={handleSave}
+              data={dataTask}
+              type="edit"
+              onClose={() => setOpenEdit(false)}
+              handleChange={handleChange}
+            />
+          )}
+          {openAdd && (
+            <ModalAddEdit
+              handleSave={handleSave}
+              data={dataTask}
+              type="add"
+              onClose={() => setOpenAdd(false)}
+              handleChange={handleChange}
+            />
+          )}
         </Fragment>
       )}
     </Fragment>

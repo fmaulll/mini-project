@@ -15,8 +15,8 @@ const TodoItem = ({ item, addStyle, handleActionMenu }) => {
       <h1 className="font-bold text-dark">{item.name}</h1>
       <div className="w-full flex items-center">
         <Progress progress={item.progress_percentage} />
-        {item.progress === 100 ? (
-          <HiCheckCircle className="ml-4 mr-[26px]" color="#43936C" size={24} />
+        {item.progress_percentage === 100 ? (
+          <HiCheckCircle className="ml-4 mr-[26px]" color="#43936C" size={32} />
         ) : (
           <h1 className="ml-4 mr-[26px] text-sm text-[#757575]">
             {item.progress_percentage}%
@@ -30,6 +30,7 @@ const TodoItem = ({ item, addStyle, handleActionMenu }) => {
       </div>
       {open ? (
         <Menu
+          item={item}
           handleClickMenu={handleActionMenu}
           onClose={() => setOpen(false)}
         />

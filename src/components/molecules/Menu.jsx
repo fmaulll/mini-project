@@ -5,7 +5,7 @@ import { ImArrowRight2, ImArrowLeft2 } from "react-icons/im";
 import { BiEditAlt } from "react-icons/bi";
 import { FaRegTrashAlt } from "react-icons/fa";
 
-const Menu = ({ onClose, handleClickMenu, id }) => {
+const Menu = ({ item, onClose, handleClickMenu }) => {
   const ref = useRef(null);
   useOutside(ref, onClose);
   return (
@@ -15,7 +15,7 @@ const Menu = ({ onClose, handleClickMenu, id }) => {
     >
       <MenuItem
         onClick={() => {
-          handleClickMenu("right");
+          handleClickMenu("right", item);
           onClose();
         }}
         icon={<ImArrowRight2 />}
@@ -24,7 +24,7 @@ const Menu = ({ onClose, handleClickMenu, id }) => {
       </MenuItem>
       <MenuItem
         onClick={() => {
-          handleClickMenu("left");
+          handleClickMenu("left", item);
           onClose();
         }}
         icon={<ImArrowLeft2 />}
@@ -33,7 +33,7 @@ const Menu = ({ onClose, handleClickMenu, id }) => {
       </MenuItem>
       <MenuItem
         onClick={() => {
-          handleClickMenu("edit");
+          handleClickMenu("edit", item);
           onClose();
         }}
         icon={<BiEditAlt />}
@@ -42,7 +42,7 @@ const Menu = ({ onClose, handleClickMenu, id }) => {
       </MenuItem>
       <MenuItem
         onClick={() => {
-          handleClickMenu("delete");
+          handleClickMenu("delete", item);
           onClose();
         }}
         type="delete"

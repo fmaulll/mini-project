@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/v1" element={<TodoPage/>} />
+          <Route path="/v1/" element={<TodoPage/>} />
         </Routes>
       </Layout>
     </BrowserRouter>

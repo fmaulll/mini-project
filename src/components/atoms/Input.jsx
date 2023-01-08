@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { useRef } from "react";
 
 const Input = ({ label = "", styling, ...other }) => {
   const inputRef = useRef(null);

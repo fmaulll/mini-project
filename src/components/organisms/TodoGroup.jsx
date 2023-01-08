@@ -65,7 +65,7 @@ const TodoGroup = ({
           <CardTodo styling={`${isOver ? "bg-gray-100" : ""}`} index={index}>
             <TodoHeader data={data} index={index} />
             {dataTask.length > 0 ? (
-              <div className="my-4">
+              <div className="mt-2 mb-4">
                 {dataTask.map((item, index) => (
                   <TodoItem
                     addStyle={`${dataTask?.length === index + 1 ? "" : "mb-3"}`}
@@ -79,7 +79,7 @@ const TodoGroup = ({
               </div>
             ) : (
               <div
-                className={`my-4 relative p-4 border border-[#E0E0E0] rounded text-gray-500`}
+                className={`my-4 relative px-4 py-2 border border-[#E0E0E0] rounded text-gray-500`}
               >
                 No Task
               </div>

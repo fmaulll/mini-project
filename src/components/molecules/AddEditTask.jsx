@@ -32,6 +32,7 @@ const AddEditTask = ({ data, handleChange, type, onClose, handleSave }) => {
         label="Progress"
         placeholder="70%"
         type="number"
+        max={100}
         value={data.progress_percentage}
       />
       <div className="flex justify-end">

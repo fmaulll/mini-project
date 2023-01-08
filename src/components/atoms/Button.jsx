@@ -16,7 +16,7 @@ const Button = ({ children, buttonType = "add", icon, styling, ...other }) => {
   return (
     <button
       {...other}
-      className={buttonType === "add" ? "font-normal text-sm flex items-center" : `shadow-lg px-4 h-7 text-xs font-bold rounded-lg flex items-center duration-200 ${getStyle(buttonType)} ${styling}`}
+      className={buttonType === "add" ? "font-normal text-sm flex items-center" : `shadow-lg py-1 px-4 h-7 text-xs font-bold rounded-lg flex items-center duration-200 ${getStyle(buttonType)} ${styling}`}
     >
       {icon ? <div className="mr-1">{icon}</div> : null}
       {children}

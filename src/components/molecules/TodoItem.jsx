@@ -24,7 +24,7 @@ const TodoItem = ({ todos, item, addStyle, handleActionMenu }) => {
       <div className="w-full flex items-center pt-3 border-t mt-2 border-[#E0E0E0] border-dashed">
         <Progress progress={item.progress_percentage} />
         {item.progress_percentage === 100 ? (
-          <HiCheckCircle className="ml-4 mr-[26px]" color="#43936C" size={32} />
+          <HiCheckCircle className="ml-4 mr-[26px] h-min" color="#43936C" size={28} />
         ) : (
           <h1 className="ml-4 mr-[26px] text-sm text-[#757575]">
             {item.progress_percentage}%
@@ -32,8 +32,9 @@ const TodoItem = ({ todos, item, addStyle, handleActionMenu }) => {
         )}
         <FiMoreHorizontal
           onClick={handleClickMenu}
-          className="cursor-pointer w-6 flex justify-center items-center hover:bg-[#EDEDED] duration-200 rounded"
+          className="cursor-pointer flex justify-center items-center hover:bg-[#EDEDED] duration-200 rounded h-min"
           color="#757575"
+          size={32}
         />
       </div>
       {open ? (

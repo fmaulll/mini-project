@@ -15,7 +15,7 @@ const Label = ({children, index}) => {
   };
   return (
     <h1
-      className={`py-0.5 px-2 rounded border text-xs mb-2.5 ${getColor(index)}`}
+      className={`py-0.5 px-2 rounded border text-xs mb-2 ${getColor(index)}`}
     >
       {children}
     </h1>

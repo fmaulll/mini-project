@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ModalAddTodo from "../components/organisms/ModalAddTodo";
 import Header from "./Header";
 
@@ -11,6 +12,7 @@ const initData = {
 };
 
 const Layout = ({ children }) => {
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({
     title: "",
@@ -59,7 +61,7 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     if (window.location.pathname === "/") {
-      window.location.pathname = "/v1";
+      navigate("/v1")
     }
   }, []);
 

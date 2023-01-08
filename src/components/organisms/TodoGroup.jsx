@@ -33,14 +33,15 @@ const TodoGroup = ({ token, data, index, handleActionMenu, onClickAdd }) => {
     };
 
     getDataTask();
-  }, [data]);
+  }, []);
+
   return (
     <Fragment>
       {loading ? (
         <CardTodo index={index}>
           <div className="flex justify-center items-center font-bold text-dark">
             <AiOutlineLoading3Quarters className="animate-spin mr-2" />{" "}
-            Loading...
+            Getting Tasks...
           </div>
         </CardTodo>
       ) : (

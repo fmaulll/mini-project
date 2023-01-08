@@ -6,15 +6,12 @@ import Layout from "./layout";
 import TodoPage from "./pages/TodoPage";
 
 function App() {
-
   return (
     <DndProvider backend={HTML5Backend}>
       <BrowserRouter>
         <Layout>
           <Routes>
-            <Route path="/*">
-              <Route index path="v1" element={<TodoPage />} />
-            </Route>
+            <Route index path="/v1" element={<TodoPage />} />
           </Routes>
         </Layout>
       </BrowserRouter>

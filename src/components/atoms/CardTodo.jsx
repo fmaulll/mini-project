@@ -1,6 +1,6 @@
 import React from "react";
 
-const CardTodo = ({ children, index }) => {
+const CardTodo = ({ children, index, styling }) => {
   const getColor = (idx) => {
     if ((idx + 1) % 4 === 0) {
       return "border-success bg-[#F8FBF9]";
@@ -14,7 +14,7 @@ const CardTodo = ({ children, index }) => {
     return "border-primary bg-[#F7FEFF]";
   };
   return (
-    <div className={`rounded border h-min p-4 ${getColor(index)}`}>{children}</div>
+    <div className={`rounded border h-min p-4 duration-200 ${getColor(index)} ${styling}`}>{children}</div>
   );
 };
 

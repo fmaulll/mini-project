@@ -4,7 +4,7 @@ import { FiMoreHorizontal } from "react-icons/fi";
 import { HiCheckCircle } from "react-icons/hi";
 import Menu from "./Menu";
 
-const TodoItem = ({ item, addStyle, handleActionMenu }) => {
+const TodoItem = ({ todos, item, addStyle, handleActionMenu }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickMenu = () => {
@@ -33,6 +33,7 @@ const TodoItem = ({ item, addStyle, handleActionMenu }) => {
           item={item}
           handleClickMenu={handleActionMenu}
           onClose={() => setOpen(false)}
+          todos={todos}
         />
       ) : null}
     </div>

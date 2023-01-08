@@ -7,7 +7,7 @@ import { BiPlusCircle } from "react-icons/bi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
 
-const TodoGroup = ({ token, data, index, handleActionMenu, onClickAdd }) => {
+const TodoGroup = ({ todos, token, data, index, handleActionMenu, onClickAdd }) => {
   const [loading, setLoading] = useState(false);
   const [dataTask, setDataTask] = useState({});
 
@@ -56,6 +56,7 @@ const TodoGroup = ({ token, data, index, handleActionMenu, onClickAdd }) => {
                   key={index}
                   item={item}
                   handleActionMenu={handleActionMenu}
+                  todos={todos}
                 />
               ))}
             </div>

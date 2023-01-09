@@ -141,6 +141,17 @@ const TodoPage = () => {
   };
 
   const handleChange = (key, value) => {
+    if(key === "progress_percentage"){
+      if(value > 100){
+        setDataTask((prev) => {
+          return {
+            ...prev,
+            progress_percentage: 100,
+          };
+        });
+        return
+      }
+    }
     setDataTask((prev) => {
       return {
         ...prev,

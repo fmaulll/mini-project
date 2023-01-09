@@ -118,6 +118,7 @@ const TodoPage = () => {
 
   const handleClickAdd = (id) => {
     setSelectedTodo(id);
+    setDataTask(initDataTask)
     setOpenAdd(true);
   };
 
